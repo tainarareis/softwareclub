@@ -3,7 +3,7 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
-		<title>Connectedin</title><html>
+		<title>SoftwareClub</title><html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="{% static "scripts/vendor/bootstrap-min.js" %}"></script>
     <script type="text/javascript" src="{% static "scripts/vendor/jquery-1.9.1.js" % }"></script>
@@ -23,15 +23,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><span>Brand</span></a>
+            <a class="navbar-brand" href="#"><img height="20" alt="Brand" src="../static/img/logo2.png" class="center-block"></a>
           </div>
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
               <li class="active">
-                <a href="#">Home</a>
+                <a href="{% url 'index' %}">Entrar</a>
               </li>
               <li>
-                <a href="#">Contacts</a>
+                <a href="#">Cadastrar</a>
               </li>
             </ul>
           </div>
@@ -41,7 +41,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h1 class="text-inverse">ConnectedIn</h1>
+						<img class="center-block img-circle img-responsive logo" src="../static/img/logo2.png">
+            <h1 class="text-inverse">SoftwareClub</h1>
             <h3 class="text-inverse">Conectar os alunos de Engenharia de Software se tornou fácil!</h3>
             <br>
             <br>
@@ -144,7 +145,7 @@
         <div class="row">
           <div class="col-md-4"></div>
 	        <div class="col-md-4">
-            <img src="../static/img/tainara.png" class="center-block img-circle img-responsive max-width:0%">
+            <img src="../static/img/tainara.png" class="center-block img-circle img-responsive" style="width: 200px">
             <h3 class="text-center">Tainara Reis</h3>
             <p class="text-center">Desenvolvedora e Criadora</p>
           </div>
@@ -152,6 +153,6 @@
         </div>
       </div>
     </div>
+		{% include "footer.html" %}
   </body>
-
 </html>

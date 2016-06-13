@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="col-lg-12">
+<div id="atualizacao"  class="col-lg-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong>Todos os Perfis</strong>
 		</div>
-
 		{% if perfis %}
 			<ul>
 				{% for perfil in perfis %}
@@ -21,10 +20,11 @@
 	</div>
 
 	<div class="panel panel-default">
-		{% if perfil_logado.convites_recebidos.count %}
+	{% with total_de_convites=perfil_logado.convites_recebidos.count %}
+		{% if total_de_convites %}
 		<div class="panel-heading">
-			<strong> Há  {{perfil_logado.convites_recebidos.count}}
-				convite{{perfil_logado.convites_recebidos.count |pluralize}}
+			<strong> Há  {{total_de_convites}}
+				convite{{total_de_convites |pluralize}}
 				aguardando aprovação</strong>
 		</div>
 		<ul class="list-group">
@@ -39,6 +39,7 @@
 			<p>Nenhum convite recebido</p>
 		</div>
 		{% endif %}
+	{% endwith %}
 	</div>
 
 {% endblock %}

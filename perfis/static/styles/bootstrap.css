@@ -304,7 +304,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #ffffff;
+  /* background-color: #FF8F8F; */
 }
 
 input,
@@ -773,8 +773,10 @@ pre code {
 }
 
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 40px;
+  margin-left: 40px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
 .row:before,
@@ -5432,9 +5434,9 @@ a.list-group-item:focus {
 }
 
 .panel-default > .panel-heading {
-  color: #333333;
-  background-color: #f5f5f5;
-  border-color: #dddddd;
+  color: #f5f5f5;
+  background-color: #0066C2;
+  border-color: #333333;
 }
 
 .panel-default > .panel-heading + .panel-collapse .panel-body {
