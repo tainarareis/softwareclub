@@ -14,7 +14,7 @@ class Perfil(models.Model):
 
 
 class Convite(models.Model):
-    """relacionamento bidirecional usando mais
-    um parâmetro do models.ForeignKey, o related_name"""
+    """relacionamento bidirecional usando um parâmetro
+    a mais no models.ForeignKey: o related_name"""
     solicitante = models.ForeignKey(Perfil, related_name='convites_feitos')
     convidado = models.ForeignKey(Perfil, related_name='convites_recebidos')

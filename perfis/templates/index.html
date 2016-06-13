@@ -11,7 +11,7 @@
 			<ul>
 				{% for perfil in perfis %}
 					<li>
-						<a href="{% url 'exibir' perfil.id %}">{{ perfil.nome }}</a> / {{ perfil.email }}
+						<a href="{% url 'exibir' perfil.id %}">{{ perfil.nome }} / {{ perfil.email }}</a>
 					</li>
 				{% endfor %}
 			</ul>
@@ -19,4 +19,26 @@
 			<p>Nenhum Perfil encontrado</p>
 		{% endif %}
 	</div>
+
+	<div class="panel panel-default">
+		{% if perfil_logado.convites_recebidos.count %}
+		<div class="panel-heading">
+			<strong> Há  {{perfil_logado.convites_recebidos.count}}
+				convite{{perfil_logado.convites_recebidos.count |pluralize}}
+				aguardando aprovação</strong>
+		</div>
+		<ul class="list-group">
+			{% for convite in perfil_logado.convites_recebidos.all %}
+			<li class="list-group-item">
+				{{convite.solicitante.nome}}
+				<a href="#" class="pull-right">Aceitar</a>
+			</li>
+			{% endfor %}
+		{% else %}
+		<div class="panel-body">
+			<p>Nenhum convite recebido</p>
+		</div>
+		{% endif %}
+	</div>
+
 {% endblock %}
