@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding:utf-8
 from django.shortcuts import render, redirect
-from perfis.models import Perfil
+from perfis.models import Perfil, Convite
 
 
 def index(request):
@@ -33,6 +33,11 @@ def convidar(request, perfil_id):
     nada para o template."""
     return redirect('index')
 
+
+def aceitar(request, convite_id):
+    convite = Convite.objects.get(id=convite_id)
+    convite.aceitar()
+    return redirect('index')
 
 def get_perfil_logado(request):
     return Perfil.objects.get(id=1)

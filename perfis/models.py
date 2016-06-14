@@ -8,6 +8,9 @@ class Perfil(models.Model):
     email = models.CharField(max_length=255, null=False)
     telefone = models.CharField(max_length=15, null=False)
     nome_empresa = models.CharField(max_length=255, null=False)
+    """perfil se relaciona com si mesmo numa relação
+    muitos para muitos"""
+    contatos = models.ManyToManyField('self')
 
     def convidar(self, perfil_convidado):
         Convite(solicitante=self, convidado=perfil_convidado).save()
@@ -18,3 +21,9 @@ class Convite(models.Model):
     a mais no models.ForeignKey: o related_name"""
     solicitante = models.ForeignKey(Perfil, related_name='convites_feitos')
     convidado = models.ForeignKey(Perfil, related_name='convites_recebidos')
+
+    def aceitar(self):
+        self.convidado.contatos.add(self.solicitante)
+        self.solicitante.contatos.add(self.convidado)
+        # deletar o convite após o convite ser aceitar_convite
+        self.delete()
