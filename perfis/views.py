@@ -20,9 +20,11 @@ def busca(request):
 
 def exibir(request, perfil_id):
     perfil = Perfil.objects.get(id=perfil_id)
+    perfil_logado = get_perfil_logado(request)
+    is_contato = perfil in perfil_logado.contatos.all()
     """render: retorna o mesmo request, o nome do template e um
     dicionário com os dados que se pretende disponibilizar no template """
-    return render(request, 'perfil.html', {"perfil": perfil})
+    return render(request, 'perfil.html', {"perfil": perfil, "is_contato": is_contato})
 
 
 def convidar(request, perfil_id):
