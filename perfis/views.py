@@ -34,7 +34,7 @@ def exibir(request, perfil_id):
 def convidar(request, perfil_id):
     perfil_a_convidar = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
-    perfil_logado.convidar(perfil_a_convidar)
+    convite = perfil_logado.convidar(perfil_a_convidar)
     """redirect troca o request, logo não se pode disponibilizar
     nada para o template."""
     return redirect('index')
@@ -42,7 +42,7 @@ def convidar(request, perfil_id):
 @login_required
 def aceitar(request, convite_id):
     convite = Convite.objects.get(id=convite_id)
-    convite.aceitar()
+    convite.aceitar_convite()
     return redirect('index')
 
 @login_required

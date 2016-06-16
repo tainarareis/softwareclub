@@ -16,12 +16,10 @@ class Perfil(models.Model):
 
     @property
     def email(self):
-        return self.usuario.email
+        self.usuario.email
 
     def convidar(self, perfil_convidado):
-        convite = Convite.objects.create()
-        convite.criar_convite(solicitante=self, convidado=perfil_convidado)
-
+        Convite(solicitante=self, convidado=perfil_convidado).save()
 
 """# Observer (Abstrato)
 class Observer():
@@ -32,19 +30,45 @@ class Observer():
         pass"""
 
 
-# Observer concreto
+"""# Observer concreto
 class ConviteObserver(models.Model):
 
-    convite = models.OneToOneField('Convite')
-    _CONVITE_ACEITO = "Stauts : Aceito"
-    _CONVITE_AGUARDANDO = "Status: Aguardando resposta"
+    convite = models.ForeignKey('Convite')
+    #publisher = models.ForeignKey('Publisher', related_name="publishers")
+
+    #CONVITE_ACEITO = "Stauts : Aceito"
+    #CONVITE_AGUARDANDO = "Status: Aguardando resposta"
+
+    @classmethod
+    def create(self, convite):
+        observer = ConviteObserver(convite=convite)
+        return observer
 
     def update_status(self, status):
-        if status == _CONVITE_AGUARDANDO:
-            self.convite.notificar(self.convite.convidado)
-        elif status == _CONVITE_ACEITO:
-            self.convite.notificar(self.convite.solicitante)
+        if status == "Stauts : Aceito":
+            self.notificar_convite_aceito(self.convite.solicitante)
+        elif status == "Status: Aguardando resposta":
+            self.notificar_convite_aguardando(self.convite.convidado)
 
+    def notificar_convite_aceito(self, perfil):
+        notificacao = "O convite a " + self.convite.solicitante.nome + " foi aceito."
+        return notificacao
+
+    def notificar_convite_aguardando(self, perfil):
+        notificacao = perfil.nome +" te enviou um convite."
+        return notificacao
+"""
+"""
+class Publisher(models.Model):
+
+    def notificar_convite_aceito(self, perfil):
+        notificacao = "O convite a " + perfil.nome + " foi aceito."
+        return notificacao
+
+    def notificar_convite_aguardando(self, perfil):
+        notificacao = perfil.nome +" te enviou um convite."
+        return notificacao
+"""
 
 # Subject
 class Convite(models.Model):
@@ -52,22 +76,20 @@ class Convite(models.Model):
     a mais no models.ForeignKey: o related_name"""
     solicitante = models.ForeignKey(Perfil, related_name='convites_feitos')
     convidado = models.ForeignKey(Perfil, related_name='convites_recebidos')
-    observer = models.ForeignKey('ConviteObserver', related_name='+', default="")
+    #observer = models.ForeignKey(ConviteObserver, related_name='observers')
 
-    def criar_convite(self, solicitante, convidado):
-        self.solicitante = solicitante
-        self.convidado = convidado
-        self.observer = ConviteObserver.objects.create()
-        self.observer.convite = self
-        self.observer.update_status("Status: Aguardando resposta")
-        self.save()
+    @classmethod
+    def create(self, solicitante, convidado):
+        convite = Convite(solicitante=solicitante, convidado=convidado)
+        #self.observer = ConviteObserver.create(convite)
+        #convite.notificar_observer("Status: Aguardando resposta")
+
+    """def notificar_observer(self, status):
+        self.observer.update_status(status)"""
 
     def aceitar_convite(self):
         self.convidado.contatos.add(self.solicitante)
         self.solicitante.contatos.add(self.convidado)
-        self.observer.update_status("Status: Aceito")
+        #convite.notificar_observer("Status: Aceito")
         # deletar o convite após o convite ser aceito
         self.delete()
-
-    def notificar(self, perfil):
-        pass

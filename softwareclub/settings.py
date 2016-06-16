@@ -1,5 +1,5 @@
 """
-Django settings for connectedin project.
+Django settings for softwareclub project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'connectedin.urls'
+ROOT_URLCONF = 'softwareclub.urls'
 
-WSGI_APPLICATION = 'connectedin.wsgi.application'
+WSGI_APPLICATION = 'softwareclub.wsgi.application'
 
 
 # Database
@@ -85,4 +85,4 @@ STATIC_URL = '/static/'
 
 LOGIN_URL="/login/"
 LOGOUT_URL="/logout/"
-LOGIN_REDIRECT_URL="/"
+LOGIN_REDIRECT_URL="/index"
