@@ -2,15 +2,16 @@
 {% block body %}
 <div class="row">
   <div class="col-lg-12">
-    <h2 style="margin-top: 0">{{perfil.nome}}></h2>
+    <h2 style="margin-top: 0">{{perfil.nome}}</h2>
     <address>
-      <strong>{{perfil.nome_empresa}}</strong><br>
-      <abbr title="Telefone">Tel:</abbr>{{perfil.telefone}}<br>
-      <a href="malito:{{perfil.email}}">{{perfil.email}}</a>
+      <abbr title="Telefone">Telefone: </abbr>{{perfil.telefone}}<br>
+      <a href="malito:{{perfil.email}}">E-mail: {{perfil.email}}</a><br>
+      <strong>Áreas de interesse: {{perfil.areas_de_interesse}}<strong><br>
+      <strong>Projetos de pesquisa: {{perfil.projetos_de_pesquisa}}<strong><br>
     </address>
     {% if is_contato %}
       <div class="well well-sm">Já é um contato</div>
-    {% else %}
+    {% elif proprio_perfil == False %}
       <a href="{% url 'convidar' perfil.id %}">Convidar</a>
     {% endif %}
   </div>

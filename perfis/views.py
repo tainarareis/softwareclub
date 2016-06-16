@@ -22,9 +22,13 @@ def exibir(request, perfil_id):
     perfil = Perfil.objects.get(id=perfil_id)
     perfil_logado = get_perfil_logado(request)
     is_contato = perfil in perfil_logado.contatos.all()
+    if perfil == perfil_logado:
+        proprio_perfil = True
+    else:
+        proprio_perfil = False
     """render: retorna o mesmo request, o nome do template e um
     dicionário com os dados que se pretende disponibilizar no template """
-    return render(request, 'perfil.html', {"perfil": perfil, "is_contato": is_contato})
+    return render(request, 'perfil.html', {"perfil": perfil, "is_contato": is_contato, "proprio_perfil" : proprio_perfil})
 
 
 def convidar(request, perfil_id):
