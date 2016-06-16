@@ -12,16 +12,33 @@ class Perfil(models.Model):
     """perfil se relaciona com si mesmo numa relação
     muitos para muitos"""
     contatos = models.ManyToManyField('self')
-    provider = models.ForeignKey(NotificationCenter)
 
     def convidar(self, perfil_convidado):
-        convite = Convite()
+        convite = Convite.objects.create()
         convite.criar_convite(solicitante=self, convidado=perfil_convidado)
-        convite.save()
-        # self.subscribe(resultado_convite)
 
-    def subscribe(self, categoria):
-        self.provider.subscribe(categoria)
+
+"""# Observer (Abstrato)
+class Observer():
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
+    def update_status(self):
+        pass"""
+
+
+# Observer concreto
+class ConviteObserver(models.Model):
+
+    convite = models.OneToOneField('Convite')
+    _CONVITE_ACEITO = "Stauts : Aceito"
+    _CONVITE_AGUARDANDO = "Status: Aguardando resposta"
+
+    def update_status(self, status):
+        if status == _CONVITE_AGUARDANDO:
+            self.convite.notificar(self.convite.convidado)
+        elif status == _CONVITE_ACEITO:
+            self.convite.notificar(self.convite.solicitante)
 
 
 # Subject
@@ -30,12 +47,15 @@ class Convite(models.Model):
     a mais no models.ForeignKey: o related_name"""
     solicitante = models.ForeignKey(Perfil, related_name='convites_feitos')
     convidado = models.ForeignKey(Perfil, related_name='convites_recebidos')
-    observer = models.ForeignKey(ConviteObserver)
+    observer = models.ForeignKey('ConviteObserver', related_name='+', default="")
 
     def criar_convite(self, solicitante, convidado):
         self.solicitante = solicitante
         self.convidado = convidado
+        self.observer = ConviteObserver.objects.create()
+        self.observer.convite = self
         self.observer.update_status("Status: Aguardando resposta")
+        self.save()
 
     def aceitar_convite(self):
         self.convidado.contatos.add(self.solicitante)
@@ -44,28 +64,5 @@ class Convite(models.Model):
         # deletar o convite após o convite ser aceito
         self.delete()
 
-
-# Observer concreto
-class ConviteObserver(Observer):
-
-    convite = models.ForeignKey(Convite)
-    _CONVITE_ACEITO = "Stauts : Aceito"
-    _CONVITE_AGUARDANDO = "Status: Aguardando resposta"
-
-    def update_status(self, status):
-        if status == _CONVITE_AGUARDANDO:
-            self.notificar(convite.convidado)
-        else if status == _CONVITE_ACEITO:
-            self.notificar(convite.solicitante)
-
     def notificar(self, perfil):
-        pass
-
-
-# Observer (Abstrato)
-class Observer:
-    __metaclass__ = ABCMeta
-
-    @abstractmethod
-    def update_status(self):
         pass
