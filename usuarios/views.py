@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # coding:utf-8
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.generic.base import View
 from usuarios.forms import RegistrarUsuarioForm
 from django.contrib.auth.models import User
 from perfis.models import Perfil
-
+from django.template.context import RequestContext
 
 class RegistrarUsuarioView(View):
 
@@ -32,3 +32,17 @@ class RegistrarUsuarioView(View):
 
         # o form possui as informações dos erros no cadastro
         return render(request, self.template_name, {'form' : form})
+
+class SocialAuthView(View):
+
+    template_name = 'autenticar.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+       context = RequestContext(request,
+                               {'request': request,
+                                'user': request.user})
+       return render_to_response('home.html',
+                                 context_instance=context)
