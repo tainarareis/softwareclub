@@ -4,7 +4,7 @@ from django.contrib import admin
 from perfis import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.homepage, name='homepage'),
+    url(r'^homepage/$', views.homepage, name='homepage'),
     url(r'^index/$', views.index, name='index'),
     #url(r'^busca$', views.busca, name='busca'),
     url(r'^perfis/(?P<perfil_id>\d+)$', views.exibir, name='exibir'),
