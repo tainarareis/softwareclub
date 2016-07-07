@@ -88,16 +88,6 @@ SOCIAL_AUTH_TWITTER_SECRET = 	'G6yfh2vxmku8REVzV01FwcgB8iMQiHM36Nm1hLTcCw2mgMNuJ
 # GITHUB_APP_ID = 'e7864a83f5d718aa2177'
 # GITHUB_API_SECRET = 'f419087541d0200a96ea618cd2d6c729340ffecd'
 
-SOCIAL_AUTH_PIPELINE = (
-    'social_auth.backends.pipeline.social.social_auth_user',
-    'social_auth.backends.pipeline.associate.associate_by_email',
-    'social_auth.backends.pipeline.user.get_username',
-    'social_auth.backends.pipeline.user.create_user',
-    'social_auth.backends.pipeline.social.associate_user',
-    'social_auth.backends.pipeline.user.update_user_details',
-    'auth_pipelines.pipelines.get_user_avatar',
-    'usuarios.pipeline.salvar_perfil',
-)
 
 ROOT_URLCONF = 'softwareclub.urls'
 
@@ -135,4 +125,4 @@ STATIC_URL = '/static/'
 
 LOGIN_URL="/login/"
 LOGOUT_URL="/logout/"
-#LOGIN_REDIRECT_URL="/index"
+LOGIN_REDIRECT_URL="/index"

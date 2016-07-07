@@ -7,4 +7,5 @@ urlpatterns =  patterns('',
     url(r'^', include('perfis.urls')),
     url(r'^', include('usuarios.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
 )
