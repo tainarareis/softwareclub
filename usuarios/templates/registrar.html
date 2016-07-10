@@ -2,7 +2,7 @@
 {% block body %}
 <form class="form-signin" role="form" action="{% url 'registrar' %}" method="post">
   {% csrf_token %}
-  <h2 class="form-signin-heading">Registrar novo usuário</h2>
+  <center><h2 class="form-signin-heading">Registrar novo usuário</h2></center>
   <input type="text" id="id_nome" name="nome" class="form-control" placeholder="Nome *" required autofocus>
   <input type="text" id="id_email" name="email" class="form-control" placeholder="Email *" required >
   <input type="password" id="id_senha" name="senha" class="form-control" placeholder="Senha *" required>

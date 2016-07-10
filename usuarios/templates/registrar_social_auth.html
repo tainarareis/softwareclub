@@ -1,8 +1,8 @@
 {% extends "base_usuario.html" %}
 {% block body %}
 
- <div>
- <h1>Third-party authentication demo</h1>
+
+<h2 class="form-signin-heading">Registrar novo usuário</h2>
 
  <p>
    <ul>
@@ -15,13 +15,13 @@
      </li>
    {% else %}
      <li>
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Registra-se com o Facebook</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
+       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Registra-se com o Google</a>
      </li>
      <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Registra-se com o Twitter</a>
      </li>
      <!--li>
        <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}">Login with GitHub</a>
@@ -29,5 +29,5 @@
    {% endif %}
    </ul>
  </p>
- </div>
+
 {% endblock %}

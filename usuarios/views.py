@@ -10,7 +10,7 @@ from django.template.context import RequestContext
 template_name = 'registrar.html'
 
 def solicitar_registro(request):
-    return render(request, self.template_name)
+    return render(request, template_name)
 
 def registrar(request):
     form = RegistrarUsuarioForm(request.POST)
@@ -29,7 +29,7 @@ def registrar(request):
         return redirect('index')
 
     # o form possui as informações dos erros no cadastro
-    return render(request, self.template_name, {'form' : form})
+    return render(request, template_name, {'form' : form})
 
 def autenticar(request):
    context = RequestContext(request,
