@@ -2,7 +2,7 @@
 {% block body %}
 
 
-<h2 class="form-signin-heading">Registrar novo usuário</h2>
+<h2 class="form-signin-heading">Entrar como visitante</h2>
 
  <p>
    <ul>
@@ -10,6 +10,8 @@
      <li>
        <a>Olá {{ user.get_full_name|default:user.username }}!</a>
      </li>
+     <li>
+       <a href="{% url 'vizualizar' %}"> Visualizar perfis</a>
      <li>
        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
      </li>

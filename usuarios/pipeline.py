@@ -6,7 +6,8 @@ from importlib import import_module
 import pprint
 
 def get_backend_info(backend, user, response, *args, **kwargs):
-    if backend.name == 'facebook':
+    pass
+    """if backend.name == 'facebook':
         #user = user.get_profile()
         #usuario_a_ser_cadastrado = User.objects.create_user(username=response.get('name'), email=response.get('email'))
         #usuario_a_ser_cadastrado.nome = response.get('name')
@@ -19,7 +20,7 @@ def get_backend_info(backend, user, response, *args, **kwargs):
         email = str(response.get('email'))
         pp.pprint(nome)
         pp.pprint(email)
-        return redirect('solicitar_completar_cadastro', nome, email)
+        return redirect('solicitar_completar_cadastro', nome, email)"""
 
 
 """
