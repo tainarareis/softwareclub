@@ -8,26 +8,29 @@
    <ul>
    {% if user and not user.is_anonymous %}
      <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+       <a>Olá {{ user.get_full_name|default:user.username }}!</a>
      </li>
      <li>
        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
      </li>
    {% else %}
-     <li>
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Registra-se com o Facebook</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Registra-se com o Google</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Registra-se com o Twitter</a>
-     </li>
+ </ul>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }} " class="btn btn-block btn-social btn-facebook">
+         <span class="fa fa-facebook"></span> | Entrar com o Facebook
+       </a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-block btn-social btn-google">
+         <span class="fa fa-google-plus"></span> | Entrar com o Google+
+       </a>
+       <!--a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Registra-se com o Facebook</a>
+       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Registra-se com o Google</a-->
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}"class="btn btn-block btn-social btn-twitter">
+         <span class="fa fa-twitter"></span> | Entrar com o Twitter</a>
+
      <!--li>
        <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}">Login with GitHub</a>
      </li-->
    {% endif %}
-   </ul>
+
  </p>
 
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base_usuario.html" %}
+{% block body %}
+<form class="form-signin" role="form" action="{% url 'views.completar_cadastro' %}" method="post">
+  {% csrf_token %}
+  <center><h2 class="form-signin-heading">Registrar novo usuário</h2></center>
+  <a href="malito:{{email}}">E-mail: {{email}}</a><br>
+  <strong>Nome: {{nome}}<strong><br>
+  <input type="password" id="id_senha" name="senha" class="form-control" placeholder="Senha *" required>
+  <hr/>
+  <input type="text" id="id_telefone" name="telefone" class="form-control" placeholder="Telefone">
+  <input type="text" id="id_areas_de_interesse" name="areas_de_interesse" class="form-control" placeholder="Areas de Interesse">
+  <input type="text" id="id_projetos_de_pesquisa" name="projetos_de_pesquisa" class="form-control" placeholder="Projetos de pesquisa">
+  <hr/>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+    Registrar
+  </button>
+  <hr/>
+  <!--Informar erros na entrada do usuário-->
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{form.non_field_errors}} <!--O nome dos erros é salvo em non_field_errors-->
+  </div>
+  {% endif %}
+</form>
+{% endblock %}

@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 
 class Perfil(models.Model):
     nome = models.CharField(max_length=255, null=False)
-    telefone = models.CharField(max_length=15, null=False)
-    areas_de_interesse = models.CharField(max_length=255, null=False)
-    projetos_de_pesquisa = models.CharField(max_length=255, null=False)
+    telefone = models.CharField(max_length=15, null=True)
+    areas_de_interesse = models.CharField(max_length=255, null=True)
+    projetos_de_pesquisa = models.CharField(max_length=255, null=True)
     """perfil se relaciona com si mesmo numa relação
     muitos para muitos"""
     contatos = models.ManyToManyField('self')
@@ -20,6 +20,7 @@ class Perfil(models.Model):
 
     def convidar(self, perfil_convidado):
         Convite(solicitante=self, convidado=perfil_convidado).save()
+
 
 """# Observer (Abstrato)
 class Observer():

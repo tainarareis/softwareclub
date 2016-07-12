@@ -74,6 +74,17 @@ AUTHENTICATION_BACKENDS = (
    'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'public_profile',
+    'email',
+    'user_birthday',
+]
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email,first_name,last_name',
+}
+
+
 # Tutorial: http://artandlogic.com/2014/04/tutorial-adding-facebooktwittergoogle-authentication-to-a-django-application/
 SOCIAL_AUTH_FACEBOOK_KEY = 1612541262409392
 SOCIAL_AUTH_FACEBOOK_SECRET = '8a234cbbb1184625358e4fc301157c97'
@@ -88,6 +99,24 @@ SOCIAL_AUTH_TWITTER_SECRET = 	'G6yfh2vxmku8REVzV01FwcgB8iMQiHM36Nm1hLTcCw2mgMNuJ
 # GITHUB_APP_ID = 'e7864a83f5d718aa2177'
 # GITHUB_API_SECRET = 'f419087541d0200a96ea618cd2d6c729340ffecd'
 
+SOCIAL_AUTH_PIPELINE = (
+    # Get the information we can about the user and return it in a simple
+    # format to create the user instance later. On some cases the details are
+    # already part of the auth response from the provider, but sometimes this
+    # could hit a provider API.
+
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    #'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'usuarios.pipeline.get_backend_info',
+)
 
 ROOT_URLCONF = 'softwareclub.urls'
 
