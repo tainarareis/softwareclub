@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from usuarios import views
 
 urlpatterns = patterns('',
-	#url(r'^solicitar/$', views.solicitar_registro, name="solicitar"),
+	url(r'^solicitar/$', views.solicitar_registro, name="solicitar"),
 	url(r'^registrar/$', views.registrar, name="registrar"),
 	url(r'^autenticar/$', views.autenticar, name="registrar_social_auth"),
 	url(r'^completar_cadastro/$', views.completar_cadastro, name="completar_cadastro"),
