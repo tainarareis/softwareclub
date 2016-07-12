@@ -44,7 +44,8 @@ def solicitar_completar_cadastro(request, nome, email):
                 'nome': nome,
                 'email': email,
     }"""
-    return HttpResponseRedirect(reverse('completar_cadastro',args=(nome, email,)))
+    print (nome)
+    return HttpResponseRedirect('%s?nome=%s/%s?email=%s' % (reverse('completar_cadastro',args=(nome, email,))))
 
     """return render_to_response('completar_cadastro.html',
                                 context,

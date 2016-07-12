@@ -3,6 +3,7 @@
 from django.shortcuts import render, redirect
 from perfis.models import Perfil, Convite
 from django.contrib.auth.decorators import login_required
+from social.apps.django_app.utils import psa
 
 @login_required
 def index(request):
@@ -48,3 +49,12 @@ def aceitar(request, convite_id):
 @login_required
 def get_perfil_logado(request):
     return request.user.perfil
+
+
+def vizualizar(request):
+    return render(request, 'vizualizar.html', {
+        'perfis': Perfil.objects.all()})
+
+def exibir_para_convidado(request, perfil_id):
+    perfil = Perfil.objects.get(id=perfil_id)
+    return render(request, 'perfil_parcial.html', {"perfil": perfil})
